@@ -5,7 +5,7 @@ from api.models import Info
 
 
 class InfoTest(APITestCase):
-    fixtures = ['info']
+    fixtures = ['infos']
 
     def test_info_list(self):
         response = self.client.get('/api/infos/', format='json')

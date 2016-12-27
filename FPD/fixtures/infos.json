@@ -1,0 +1,10 @@
+[
+{
+  "model": "api.info",
+  "pk": 1,
+  "fields": {
+    "title": "Casa bonita",
+    "body": "\u00c9 uma casa muito bonita."
+  }
+}
+]
