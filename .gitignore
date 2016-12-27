@@ -6,4 +6,5 @@
 
 # Directories
 *__pycache__/
+.idea/
 myvenv/
