@@ -8,7 +8,7 @@ class InfoTest(APITestCase):
     fixtures = ['info']
 
     def test_info_list(self):
-        response = self.client.get('/info/', format='json')
+        response = self.client.get('/api/infos/', format='json')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsInstance(response.data, list)
@@ -27,7 +27,7 @@ class InfoTest(APITestCase):
         info_queryset = Info.objects.filter(**post_data)
         info_count = info_queryset.count()
 
-        response = self.client.post('/info/', post_data, format='json')
+        response = self.client.post('/api/infos/', post_data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
