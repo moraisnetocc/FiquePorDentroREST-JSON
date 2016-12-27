@@ -1,5 +1,8 @@
-*.pyc
-__pycache__
-myvenv
-db.sqlite3
-.DS_Store
+# Files
+*.DS_Store
+*.py[cod]
+*.sqlite3
+
+# Directories
+*__pycache__/
+myvenv/
