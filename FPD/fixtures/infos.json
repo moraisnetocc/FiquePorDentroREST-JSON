@@ -1,10 +1,11 @@
 [
 {
   "model": "api.info",
-  "pk": 1,
+  "pk": 3,
   "fields": {
     "title": "Casa bonita",
-    "body": "\u00c9 uma casa muito bonita."
+    "body": "\u00c9 uma casa muito bonita.",
+    "category": 1
   }
 }
 ]

@@ -16,4 +16,5 @@ if [ "$1" != "" ] && [ "$2" != "" ]; then
     dump $1 $2
 else
     dump api.info infos
+    dump api.infocategory info_categories
 fi
