@@ -4,7 +4,8 @@ import re
 
 from dj_database_url import config as db_config
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Start of ".env" reader
 # https://gist.github.com/bennylope/2999704
@@ -100,3 +101,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+
+FIXTURE_DIRS = [
+    os.path.join(PROJECT_DIR, 'fixtures'),
+]
