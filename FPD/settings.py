@@ -27,7 +27,7 @@ SECRET_KEY = '%iazc^-xqx_h39aeaww14^y38xbaw_=fnoezep0@h@5w4yotyl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.getenv('DEBUG', '0')))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*" if DEBUG else "").split(",")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
