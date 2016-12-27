@@ -1,6 +1,6 @@
 import os
-
 import re
+import sys
 
 from dj_database_url import config as db_config
 
@@ -32,6 +32,8 @@ SECRET_KEY = '%iazc^-xqx_h39aeaww14^y38xbaw_=fnoezep0@h@5w4yotyl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.getenv('DEBUG', '0')))
 
+TEST = 'test' in sys.argv
+
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*" if DEBUG else "").split(",")
 
 THIRD_APPS = [
@@ -42,18 +44,19 @@ LOCAL_APPS = [
     'api',
 ]
 
-INSTALLED_APPS = [
+DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-] + LOCAL_APPS + THIRD_APPS
+]
+
+INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'FPD.middleware.query.QueriesLog',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,6 +65,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG and not TEST:  # pragma: no cover
+    MIDDLEWARE += [
+        'FPD.middleware.query.QueriesLog',
+    ]
 
 ROOT_URLCONF = 'FPD.urls'
 
