@@ -19,7 +19,11 @@ for line in content.splitlines():  # pragma: no cover
     m1 = re.match(r'\A(?P<key>[A-Za-z_0-9]+)=(?P<value>.*)\Z',
                   re.sub(r"( +)?#(.+)?", "", line))  # Allow comments on the ".env" file
     if m1:
-        os.environ.setdefault(**m1.groupdict())
+        env = m1.groupdict()
+        try:
+            os.environ.setdefault(**env)  # Python 3
+        except TypeError:
+            os.environ.setdefault(key=env['key'], failobj=env['value'])  # Python 2
 # End of ".env" reader
 
 # SECURITY WARNING: keep the secret key used in production secret!
