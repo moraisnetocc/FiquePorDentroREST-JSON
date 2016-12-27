@@ -1,12 +1,29 @@
 import os
 
+import re
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Start of ".env" reader
+# https://gist.github.com/bennylope/2999704
+try:
+    with open(os.path.join(BASE_DIR, '.env')) as f:  # pragma: no cover
+        content = f.read()
+except IOError:
+    content = ''
+
+for line in content.splitlines():  # pragma: no cover
+    m1 = re.match(r'\A(?P<key>[A-Za-z_0-9]+)=(?P<value>.*)\Z',
+                  re.sub(r"( +)?#(.+)?", "", line))  # Allow comments on the ".env" file
+    if m1:
+        os.environ.setdefault(**m1.groupdict())
+# End of ".env" reader
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '%iazc^-xqx_h39aeaww14^y38xbaw_=fnoezep0@h@5w4yotyl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.getenv('DEBUG', '0')))
 
 ALLOWED_HOSTS = []
 
